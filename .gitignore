@@ -33,4 +33,4 @@ build/
 .vscode/
 
 ### Firebase ###
-resources/firebase/
+src/main/resources/firebase/todo-auth-demo-c5c14-firebase-adminsdk-fbsvc-ce3159b57c.json 00-20-28-808.json
