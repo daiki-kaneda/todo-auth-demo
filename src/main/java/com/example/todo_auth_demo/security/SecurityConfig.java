@@ -12,21 +12,21 @@ public class SecurityConfig {
 
     private final FirebaseAuthFilter firebaseAuthFilter;
 
-    public SecurityConfig(FirebaseAuthFilter firebaseAuthFilter){
-        this.firebaseAuthFilter=firebaseAuthFilter;
+    public SecurityConfig(FirebaseAuthFilter firebaseAuthFilter) {
+        this.firebaseAuthFilter = firebaseAuthFilter;
     }
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-        .csrf(csrf->csrf.disable())
-        .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authorizeHttpRequests(
-            auth->auth.requestMatchers("/auth/**")
-            .permitAll()
-            .anyRequest()
-            .authenticated())
-        .addFilterBefore(firebaseAuthFilter,UsernamePasswordAuthenticationFilter.class)
-        .build();
+                .csrf(csrf -> csrf.disable())
+                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(
+                        auth -> auth.requestMatchers("/auth/**")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
+                .addFilterBefore(firebaseAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 }

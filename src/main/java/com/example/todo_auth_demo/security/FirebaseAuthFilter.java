@@ -19,7 +19,7 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
 
     private final FirebaseAuthenticationProvider authProvider;
 
-    public FirebaseAuthFilter(FirebaseAuthenticationProvider authProvider){
+    public FirebaseAuthFilter(FirebaseAuthenticationProvider authProvider) {
         this.authProvider = authProvider;
     }
 
@@ -30,7 +30,8 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
             FirebaseToken token = FirebaseAuthDriver.verifyIdToken(resolveToken(request));
             Authentication auth = authProvider.createAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
-        } catch (FirebaseAuthException e) {}
+        } catch (FirebaseAuthException e) {
+        }
         filterChain.doFilter(request, response);
     }
 
