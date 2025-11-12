@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.todo_auth_demo.dtos.LoginRequest;
 import com.example.todo_auth_demo.dtos.LoginResponse;
 import com.example.todo_auth_demo.models.User;
-import com.example.todo_auth_demo.services.UserManager;
+import com.example.todo_auth_demo.services.UserService;
 import com.google.firebase.auth.FirebaseAuthException;
 
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    private final UserManager userManager;
+    private final UserService userManager;
 
-    public AuthController(UserManager userManager) {
+    public AuthController(UserService userManager) {
         this.userManager = userManager;
     }
 

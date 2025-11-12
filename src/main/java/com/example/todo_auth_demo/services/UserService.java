@@ -9,10 +9,10 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 
 @Service
-public class UserManager {
+public class UserService {
     private final UserRepository userRepository;
 
-    public UserManager(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
