@@ -14,7 +14,7 @@ import com.google.firebase.FirebaseOptions;
 public class FirebaseConfig {
     @Bean
     public FirebaseApp firebaseApp() throws IOException {
-        FileInputStream serviceAccount = new FileInputStream("path/to/serviceAccountKey.json");
+        FileInputStream serviceAccount = new FileInputStream("src/main/resources/firebase/todo-auth-demo-c5c14-firebase-adminsdk-fbsvc-ce3159b57c.json 00-20-28-808.json");
 
         FirebaseOptions options = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
