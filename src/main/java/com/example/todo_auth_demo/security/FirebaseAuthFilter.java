@@ -29,10 +29,17 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         try {
+            if (request.getRequestURI().startsWith("/auth/")) {
+                System.out.print(request.getRequestURI());
+                filterChain.doFilter(request, response);
+                return;
+            }
             FirebaseToken token = FirebaseAuthDriver.verifyIdToken(resolveToken(request));
             Authentication auth = authProvider.createAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(auth);
         } catch (FirebaseAuthException e) {
+            sendErrorResponse(response, HttpServletResponse.SC_UNAUTHORIZED, "Invalid Firebase token");
+            return;
         }
         filterChain.doFilter(request, response);
     }
@@ -43,5 +50,11 @@ public class FirebaseAuthFilter extends OncePerRequestFilter {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    private void sendErrorResponse(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.setContentType("application/json");
+        response.getWriter().write(String.format("{\"error\":\"%s\"}", message));
     }
 }
